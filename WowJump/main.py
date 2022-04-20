@@ -22,9 +22,11 @@ def scaner_file(url):
         if f==".DS_Store":
             continue
         real_url = path.join(url, f)
-        df = pandas.read_csv(real_url + "/global-cost.csv")
-        df_par = pandas.read_csv(real_url + "/weights-alpha-beta.csv")
-        df.min()
+        try:
+            df = pandas.read_csv(real_url + "/global-cost.csv")
+            df_par = pandas.read_csv(real_url + "/weights-alpha-beta.csv")
+        except:
+            print("error")
         tmin = findMin(df.min()["Run-0"],df.min()["Run-1"],df.min()["Run-2"],df.min()["Run-3"],df.min()["Run-3"])
         if tmin < reMin:
             reMin = df.min()["Run-0"]
