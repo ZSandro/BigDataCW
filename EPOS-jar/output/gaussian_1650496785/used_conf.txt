@@ -1,0 +1,29 @@
+CONFIGURATION:
+dataset = gaussian
+output = /Users/zhaoxiang/Desktop/BigDataCW/EPOS-jar/output/gaussian_1650496785
+==============
+numSimulations = 5
+dataset = gaussian
+numAgents = 1000
+numPlans = 10
+planDim = 144
+numIterations = 60
+numChildren = 2
+--------------
+alpha = 0.6
+beta = 0.3
+global cost function = variance
+local cost function = index
+goal signal = null
+--------------
+permutationID = 0
+reorganizationSeed = 0
+permutationSeed = 0
+permutationFile = null
+reorganizationPeriod = 3
+memorizationOffset = 5
+reorganizationStrategy = GLOBAL_COST_REDUCTION
+convergenceTolerance = 0.5
+--------------
+loggingLevel = SEVERE
+Selected Loggers: WeightsLogger, ReorganizationLogger, VisualizerLogger, TerminationLogger, GlobalResponseVectorLogger, LocalCostMultiObjectiveLogger, SelectedPlanLogger, GlobalComplexCostLogger, UnfairnessLogger, GlobalCostLogger, PlanFrequencyLogger

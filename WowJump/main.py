@@ -17,9 +17,11 @@ def scaner_file(url):
     reMin = 9999
     alpha = 0
     beta = 0
+    count = 0
     file = os.listdir(url)
     for f in file:
-        if f==".DS_Store":
+        count = count + 1
+        if f == ".DS_Store":
             continue
         real_url = path.join(url, f)
         try:
@@ -29,10 +31,11 @@ def scaner_file(url):
             print("error")
         tmin = findMin(df.min()["Run-0"],df.min()["Run-1"],df.min()["Run-2"],df.min()["Run-3"],df.min()["Run-3"])
         if tmin < reMin:
-            reMin = df.min()["Run-0"]
+            reMin = tmin
             alpha = df_par["Unfairness weight"][0]
             beta = df_par["Local cost weight"][0]
-        print(reMin, alpha, beta)
+            print(reMin, alpha, beta)
+    print(count)
 
 
 def findMin(a,b,c,d,e):
@@ -40,7 +43,6 @@ def findMin(a,b,c,d,e):
 
 if __name__ == '__main__':
     # command = "cd ../EPOS-jar && java -jar IEPOS-Tutorial.jar"
-    # changePars(0, 0.3)
     # count = 0
     # for i in range(100):
     #     for j in range(100):
