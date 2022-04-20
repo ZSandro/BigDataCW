@@ -19,6 +19,7 @@ def scaner_file(url):
     beta = 0
     count = 0
     file = os.listdir(url)
+    file_handle = open('../result.txt', mode='w')
     for f in file:
         count = count + 1
         if f == ".DS_Store":
@@ -28,29 +29,31 @@ def scaner_file(url):
             df = pandas.read_csv(real_url + "/global-cost.csv")
             df_par = pandas.read_csv(real_url + "/weights-alpha-beta.csv")
         except:
-            print("error")
+            file_handle.write(real_url + "   error" + ' \n')
         tmin = findMin(df.min()["Run-0"],df.min()["Run-1"],df.min()["Run-2"],df.min()["Run-3"],df.min()["Run-3"])
         if tmin < reMin:
             reMin = tmin
             alpha = df_par["Unfairness weight"][0]
             beta = df_par["Local cost weight"][0]
-            print(reMin, alpha, beta)
+            text = str(reMin) + "  " + str(alpha) + "  " + str(beta)
+            file_handle.write(text + ' \n')
     print(count)
+    file_handle.close()
 
 
 def findMin(a,b,c,d,e):
     return min(e, min(min(a, b), min(c, d)))
 
 if __name__ == '__main__':
-    # command = "cd ../EPOS-jar && java -jar IEPOS-Tutorial.jar"
-    # count = 0
-    # for i in range(100):
-    #     for j in range(100):
-    #         alph = float((i+1) / 10)
-    #         beta = float((j+1) / 10)
-    #         if alph+beta < 1:
-    #             changePars(alph, beta)
-    #             os.system(command)
-    # print(count)
+    command = "cd ../EPOS-jar && java -jar IEPOS-Tutorial.jar"
+    count = 0
+    for i in range(1000):
+        for j in range(1000):
+            alph = float(i / 100)
+            beta = float(j / 100)
+            if alph+beta < 1:
+                changePars(alph, beta)
+                os.system(command)
+    print(count)
     scaner_file("../EPOS-jar/output")
 
