@@ -1,8 +1,6 @@
 import os
-import subprocess
-import re
-import sys
 import Properties
+import threading
 
 
 def changePars(alpha, beta):
@@ -14,14 +12,18 @@ def changePars(alpha, beta):
     p['weightsString'] = new_par
     p.store(open(properties_path, 'w'))
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
     command = "cd ../EPOS-jar && java -jar IEPOS-Tutorial.jar"
-    changePars(0, 0)
-
-    # for i in range(3):
-        # beta = float((i+1) / 10)
-        # changePars(0.3, beta)
-    os.system(command)
+    changePars(0, 0.3)
+    count = 0
+    for i in range(100):
+        for j in range(100):
+            alph = float((i+1) / 10)
+            beta = float((j+1) / 10)
+            if alph+beta < 1:
+                changePars(alph, beta)
+                os.system(command)
+    print(count)
 
 
